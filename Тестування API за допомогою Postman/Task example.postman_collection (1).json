@@ -1,0 +1,1102 @@
+{
+	"info": {
+		"_postman_id": "27481ee8-c5e3-4689-ba3c-1a8b4d9c6e19",
+		"name": "Task example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23961050"
+	},
+	"item": [
+		{
+			"name": "Simple",
+			"item": [
+				{
+					"name": "CREATE User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"pm.collectionVariables.set(\"id\", responseJson.id);\r",
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 2000 ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"{{name}}\",\r\n    \"age\": \"{{age}}\",\r\n    \"gender\": \"{{gender}}\",\r\n    \"city\": \"{{city}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "Https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users",
+							"protocol": "Https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "a205c86f-c181-48d2-b6a1-1463c813daa0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET USER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"let time= pm.environment.get(time);\r",
+									"\r",
+									"//pm.test(\"Response time is less than +time+ ms\", function () {\r",
+									"    //pm.expect(pm.response.responseTime).to.be.below(time);\r",
+									"//});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "sdsddfddf",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "Https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users?id={{id}}",
+							"protocol": "Https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//pm.collectionVariables.get(\"id\");\r",
+									"\r",
+									"pm.collectionVariables.set(\"namenew\", \"RJeniiaR\");\r",
+									"\r",
+									"pm.collectionVariables.set(\"citynew\", \"Dnipro\");\r",
+									"\r",
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									"console.log(pm.collectionVariables.get(\"namenew\"));\r",
+									"console.log(pm.collectionVariables.get(\"citynew\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Person is name correct \", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.name).to.eql(pm.collectionVariables.get(\"namenew\"));\r",
+									"    \r",
+									"})\r",
+									"pm.test(\"Person is city correct \", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.city).to.eql(pm.collectionVariables.get(\"citynew\"));\r",
+									"    \r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"{{id}}\",\r\n    \"name\":\"{{namenew}}\",\r\n    \"city\":\"{{citynew}}\",\r\n    \"age\": \"{{age}}\",\r\n    \"gender\":\"{{gender}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users",
+							"protocol": "https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//pm.collectionVariables.get(\"id\");\r",
+									"\r",
+									"pm.collectionVariables.set(\"namenew\", \"RJeniiaR\");\r",
+									"pm.collectionVariables.set(\"citynew\", \"Dnipro\");\r",
+									"\r",
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									"console.log(pm.collectionVariables.get(\"namenew\"));\r",
+									"console.log(pm.collectionVariables.get(\"citynew\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//pm.test(\"Status code is 200\", function () {\r",
+									"   // pm.response.to.have.status(200);\r",
+									"//});\r",
+									"//pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    //pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"//});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"{{id}}\",\r\n    \"name\":\"{{namenew}}\",\r\n    \"city\":\"{{citynew}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users",
+							"protocol": "https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"pm.test(\"Body contains string\",() => {\r",
+									"  pm.expect(pm.response.text()).to.include(\"User is deleted\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users?id={{id}}",
+							"protocol": "https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Positive tests",
+			"item": [
+				{
+					"name": "CREATE User Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"pm.collectionVariables.set(\"id\", responseJson.id);\r",
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let time1=parseInt(pm.environment.get(\"time\")); \r",
+									"pm.test(\"Response time is less than +time+ ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(time1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response property matches environment variableName\", function () {\r",
+									"  pm.expect(pm.response.json().name).to.eql(pm.environment.get(\"name\"));\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response property matches environment variableCity\", function () {\r",
+									"  pm.expect(pm.response.json().city).to.eql(pm.environment.get(\"city\"));\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"age\": \"{{age}}\",\r\n    \"gender\": \"{{gender}}\",\r\n    \"city\": \"{{city}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "Https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users",
+							"protocol": "Https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "a205c86f-c181-48d2-b6a1-1463c813daa0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET USER Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let time1=parseInt(pm.environment.get(\"time\"));\r",
+									"pm.test(\"Response time is less than +time+ ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(time1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Person is ID correct\", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+									" });\r",
+									" \r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "sdsddfddf",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "Https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users?id={{id}}",
+							"protocol": "Https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT User Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"namenew\", \"RJeniiaR\");\r",
+									"pm.collectionVariables.set(\"citynew\", \"Dnipro\");\r",
+									"pm.collectionVariables.set(\"gendernew\", \"male\");\r",
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									"console.log(pm.collectionVariables.get(\"namenew\"));\r",
+									"console.log(pm.collectionVariables.get(\"citynew\"));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let time1=parseInt(pm.environment.get(\"time\"));\r",
+									"pm.test(\"Response time is less than +time+ ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(time1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Person is name correct \", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.name).to.eql(pm.collectionVariables.get(\"namenew\"));\r",
+									"    pm.expect(responseJson.city).to.eql(pm.collectionVariables.get(\"citynew\"));\r",
+									"    pm.expect(responseJson.gender).to.eql(pm.collectionVariables.get(\"gendernew\"));\r",
+									"    \r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"{{id}}\",\r\n    \"name\":\"{{namenew}}\",\r\n    \"city\":\"{{citynew}}\",\r\n    \"age\": \"{{age}}\",\r\n    \"gender\":\"{{gendernew}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users",
+							"protocol": "https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let time1=parseInt(pm.environment.get(\"time\"));\r",
+									"pm.test(\"Response time is less than +time+ ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(time1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body contains string User is deleted or found\",() => {\r",
+									"  pm.expect(pm.response.text()).to.be.oneOf([\"No user found\",\"User is deleted\"]);\r",
+									"});\r",
+									"\r",
+									" //pm.test(\"Error_num соответствует\", function () {\r",
+									"//pm.expect(responseJson.postresponse).to.have.property('errornum').and.to.be.oneOf(['994', '1 ']);\r",
+									"//});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users?id={{id}}",
+							"protocol": "https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negative tests",
+			"item": [
+				{
+					"name": "CREATE User Copy 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"pm.collectionVariables.set(\"id\", responseJson.id);\r",
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Required fields are not filled city\",() => {\r",
+									"  pm.expect(pm.response.text()).to.include(\"undefined\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response property matches environment variableCity\", function () {\r",
+									"  pm.expect(pm.response.json().city).to.eql(pm.environment.get(\"city\"));\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"age\": \"{{age}}\",\r\n    \"gender\": \"{{gender}}\"    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "Https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users",
+							"protocol": "Https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "a205c86f-c181-48d2-b6a1-1463c813daa0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET USER Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									" pm.test(\"Body contains string \",() => {\r",
+									"  pm.expect(pm.response.text()).to.include(\"id is required parameter\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "sdsddfddf",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "Https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users?Name={{name}}&CityN={{city}}",
+							"protocol": "Https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							],
+							"query": [
+								{
+									"key": "Name",
+									"value": "{{name}}"
+								},
+								{
+									"key": "CityN",
+									"value": "{{city}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT User Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//pm.collectionVariables.get(\"id\");\r",
+									"\r",
+									"pm.collectionVariables.set(\"namenew\", \"RJeniiaR\");\r",
+									"pm.collectionVariables.set(\"citynew\", \"Dnipro\");\r",
+									"\r",
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									"console.log(pm.collectionVariables.get(\"namenew\"));\r",
+									"console.log(pm.collectionVariables.get(\"citynew\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Body contains string undefined\",() => {\r",
+									"  pm.expect(pm.response.text()).to.include(\"undefined\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"{{id}}\",\r\n    \"name\":\"{{namenew}}\",\r\n    \"city\":\"{{citynew}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users",
+							"protocol": "https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT User Copy 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//pm.collectionVariables.get(\"id\");\r",
+									"\r",
+									"pm.collectionVariables.set(\"agenew\", \"25\");\r",
+									"pm.collectionVariables.set(\"gendernew\", \"male\");\r",
+									"console.log(pm.collectionVariables.get(\"id\"));\r",
+									"console.log(pm.collectionVariables.get(\"agenew\"));\r",
+									"console.log(pm.collectionVariables.get(\"gendernew\"));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let time1=parseInt(pm.environment.get(\"time\"));\r",
+									"pm.test(\"Response time is less than +time+ ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(time1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Person is name correct \", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.age).to.eql(pm.collectionVariables.get(\"agenew\"));\r",
+									"   \r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"{{id}}\",\r\n    \"name\":\"{{name}}\",\r\n    \"city\":\"{{city}}\",\r\n    \"age\": \"{{agenew}}\",\r\n    \"gender\":\"{{gendernew}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users",
+							"protocol": "https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Body contains string id is required par\",() => {\r",
+									"  pm.expect(pm.response.text()).to.include(\"id is required parameter\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://em.staging.api.onereach.ai/http/1b3bebb7-e882-4f1e-a74b-ee381bfa69d6/users?name={{namenew}}",
+							"protocol": "https",
+							"host": [
+								"em",
+								"staging",
+								"api",
+								"onereach",
+								"ai"
+							],
+							"path": [
+								"http",
+								"1b3bebb7-e882-4f1e-a74b-ee381bfa69d6",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "{{namenew}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "namenew",
+			"value": ""
+		},
+		{
+			"key": "citynew",
+			"value": ""
+		},
+		{
+			"key": "agenew",
+			"value": ""
+		},
+		{
+			"key": "gendernew",
+			"value": ""
+		}
+	]
+}
